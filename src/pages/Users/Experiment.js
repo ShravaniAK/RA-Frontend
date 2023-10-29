@@ -157,7 +157,7 @@ const Experiment = () => {
 
        <OtherLayout lang="JAVA"/>
        <OtherLayout lang="Python"/>
-       <OtherLayout lang="Javascript"/  >
+       <OtherLayout lang="Javascript"/>
        <OtherLayout lang="Ruby"  />
 
 

@@ -21,13 +21,17 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: "30%",
   bgcolor: '#ffffff',
   border: '1px solid #000',
   borderRadius:"10px",
   boxShadow: 24,
   outline:"none",
-  p: 4,
+  pt: 4,
+  pb:4,
+  pl:2,
+  pr:2,
+  textAlign:'center',
 };
 
 
@@ -49,7 +53,7 @@ return (
  justifyContent:"center",
  alignItems:"center"}}>
 
-<Box  >       
+<Box>       
 <Card sx={{ maxWidth: 355 ,minHeight:200,boxShadow:5}} >
       {/* <CardMedia
         component="img"
