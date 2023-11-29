@@ -19,6 +19,8 @@ import { Box } from "@mui/system";
 import { Paper } from "@mui/material";
 import { styled } from "@mui/system";
 
+const API_BASE_URL = process.env.REACT_APP_API;
+
 function QuestionBankLanguage() {
   const navigate = useNavigate();
   const options = [
@@ -29,8 +31,7 @@ function QuestionBankLanguage() {
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
   // const [Language, setLanguage] = useState("");
-  const [admin_programming_language, setAdmin_programming_language] =
-    useState("");
+  // const [admin_programming_language, setAdmin_programming_language] =useState("");
   // const handleChange = (e) => {
   //   setadmin_programming_language(e.target.value)
   // }
@@ -41,10 +42,10 @@ function QuestionBankLanguage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { admin_programming_language: selectedLanguage };
-
+    
     try {
       const response = await fetch(
-        "https://assesment-web.onrender.com/questionbank/",
+        `${API_BASE_URL}/questionbank/`,
         {
           method: "POST",
           headers: {
@@ -55,14 +56,22 @@ function QuestionBankLanguage() {
       );
 
       if (response.ok) {
-        console.log("Language posted successfully to the API");
-        // Redirect to the appropriate route after successful API call
-        navigate("/levels/easy");
-      } else {
-        console.error("Failed to post language to API");
-      }
+        const responseData = await response.json();
+        const { question_bank_id } = responseData; 
+
+        if (question_bank_id) {
+          
+          localStorage.setItem("question_bank_id", question_bank_id);
+          console.log("Question Bank ID stored in local storage:", question_bank_id);
+          
+         
+          navigate("/levels/easy");
+        } else {
+          console.error("Question Bank ID not found");
+        }
+      } 
     } catch (error) {
-      console.error("Error posting language to API:", error);
+      console.error("Error fetching question_bank_id:", error);
     }
   };
 
@@ -88,7 +97,7 @@ function QuestionBankLanguage() {
               select
               label="Language"
               onChange={handleChange}
-              value={admin_programming_language}
+              value={selectedLanguage}
               helperText="Please Select a Language"
               fullWidth
             >

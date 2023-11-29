@@ -12,12 +12,14 @@ import {Link} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
 
 const Experiment = () => {
-
+  const [ffuid, setFfuid] = useState(null);
   const [plang, setPlang] = React.useState(null);
   const [level, setLevel] = React.useState('');
   const [strtime, setStrTime] = React.useState(0);
   const [last_used, setLast_used] = React.useState('');
   const [duration, setDuration] = React.useState('');
+
+  const API_BASE_URL = process.env.REACT_APP_API;
 
   // const programming_language = "2";
 
@@ -25,7 +27,7 @@ const Experiment = () => {
   const navigate = useNavigate();
 
   
-  const [selectedLanguage, setSelectedLanguage] = useState('');
+  const [selectedLanguage, setSelectedLanguage] = useState();
   // useEffect(() => {
   //   fetch('https://assesment-web.onrender.com/expertise/')
   //       .then(res => {
@@ -50,8 +52,23 @@ const Experiment = () => {
   // }
   //console.log(levName);
   const handleLanguageSelect = (language) => {
-    setSelectedLanguage(language);
-  }
+    let value;
+    switch (language) {
+      case 'C++':
+        value = '1';
+        break;
+      case 'Python':
+        value = '2';
+        break;
+      case 'JavaScript':
+        value = '3';
+        break;
+      default:
+        value = '';
+        break;
+    }
+    setSelectedLanguage(value);
+  };
 
 
   const handleLevel = (newLev) => {
@@ -69,37 +86,68 @@ const Experiment = () => {
 
   const time = parseInt(strtime);
 
+  // useEffect(() => {
+  //   const fetchUid = async () => {
+  //     try {
+  //       const response = await fetch('https://assesment-web.onrender.com/demographic/');
+  //       const data = await response.json();
+  //       const uid = data[0]?.uid;
+  //       console.log('Fetched uid:', uid);
+  //       setFfuid(uid);
+  //       localStorage.setItem('ffuid', uid);
+  //     } catch (error) {
+  //       console.error('Error:', error);
+  //     }
+  //   };
+
+  //   fetchUid();
+  // }, []);
+ 
   
 
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const expertiseData = {selectedLanguage, level, duration, time, last_used};
+    const expertiseData = { selectedLanguage, level, duration, time, last_used };
     const emptyData = { ffuid: null, ffqbid: null };
 
     console.log(expertiseData);
-    fetch('https://assesment-web.onrender.com/expertise/', {
-                    method: 'POST',
-                    headers: { "Content-Type": "application/json" }, 
-                    body: JSON.stringify(expertiseData)
-                }).then(() => {
-                    console.log('Done successfully');
-                })
+    try {
+      await fetch(`${API_BASE_URL}/expertise/?ffuid=${ffuid}`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(expertiseData)
+      });
+      console.log('Expertise data submitted successfully.');
 
-                fetch('https://assesment-web.onrender.com/evaluation/', {
-                  method: 'POST',
-                  headers: { "Content-Type": "application/json" }, 
-                  body: JSON.stringify(emptyData)
-              }).then(() => {
-                  console.log('Initialized evaluation');
-              })
-
-       navigate("/level/Easy");
-
-
-  }
-
+      const evaluationInitResponse = await fetch(`${API_BASE_URL}/evaluation/?ffuid=${ffuid}`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(emptyData)
+      });
+  
+      if (evaluationInitResponse.ok) {
+        const evaluationInitData = await evaluationInitResponse.json();
+        const { evaluation_id } = evaluationInitData; // Assuming API response contains evaluation_id
+  
+        if (evaluation_id) {
+          localStorage.setItem('evaluation_id', evaluation_id);
+          console.log('Evaluation initialized with evaluation ID:', evaluation_id);
+          navigate("/level/Easy");
+        } else {
+          console.error('Evaluation ID not found');
+          alert('Evaluation ID not found.');
+        }
+      } else {
+        console.error('Error initializing evaluation:', evaluationInitResponse.status);
+       
+      }
+    } catch (error) {
+      console.error('Error during initialization:', error);
+     
+    }
+  };
+  
   return (
 <>
 
@@ -107,7 +155,7 @@ const Experiment = () => {
 
       <Box sx={{
         width: '100%',
-        height: 200,
+        height: "100%",
         border: 0,
         margin: "2rem 0",
         borderRadius: '16px',
@@ -124,27 +172,33 @@ const Experiment = () => {
 
 
 
-        <ButtonGroup>
+        {/* <ButtonGroup>
         <Button onClick={() => handleLanguageSelect("1")}>C++</Button>
         <Button onClick={() => handleLanguageSelect("2")}>Python</Button>
         <Button onClick={() => handleLanguageSelect("3")}>JavaScript</Button>
-      </ButtonGroup>
+      </ButtonGroup> */}
 
-        <Layout lang={selectedLanguage} 
-        level={level} onChangeLevel={handleLevel}
-        duration={duration} onChangeDuration={handleDuration}
-        time={strtime} onChangeTime={handleTime}
-        last_used={last_used} onChangeDate={handleDate}       
+      <Layout
+          selectedLanguage={selectedLanguage}
+          onLanguageChange={handleLanguageSelect}
+          level={level}
+          onChangeLevel={handleLevel}
+          duration={duration}
+          onChangeDuration={handleDuration}
+          time={strtime}
+          onChangeTime={handleTime}
+          last_used={last_used}
+          onChangeDate={handleDate}
+        />
         
-        ></Layout>
 
 
 
 
-      </Box>
+      {/* </Box> */}
 
 
-      <Box sx={{
+      {/* <Box sx={{
         width: '100%',
         height: 600,
         border: 0,
@@ -153,7 +207,7 @@ const Experiment = () => {
         
         bgcolor: 'info.main',
         padding: "5px"
-      }} >
+      }} > */}
 
 
         {/* <Typography variant="h4" component="h2" marginLeft={2} marginTop={3} color="common.white">
@@ -203,14 +257,18 @@ const Experiment = () => {
         padding: "5px",
         
       }} > */}
-       
-       <Link to={"/register"} style={{ textDecoration: 'none' }}>
+
+      <div className="btns" style={{margin:'2.4rem'}}>
+      <Link to={"/register"} style={{ textDecoration: 'none' }}>
        <Button variant="contained" size="large" color="secondary" sx={{mr:2}} >Back</Button>
        </Link>
       {/* <Link to={"/level/Easy"}> */}
        
       <Button variant="contained" color="success" size="large" sx={{ml:2}} onClick={handleSubmit} >Next</Button>
       {/* </Link> */}
+      </div>
+       
+      
       </Box>
    
       

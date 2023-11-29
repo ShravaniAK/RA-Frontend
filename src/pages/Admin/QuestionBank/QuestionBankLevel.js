@@ -19,7 +19,7 @@ import { Box } from '@mui/system';
 import { Paper } from '@mui/material';
 import { styled } from '@mui/system';
 
-
+const API_BASE_URL = process.env.REACT_APP_API;
 
 function QuestionBankLevel() {
 
@@ -61,42 +61,49 @@ function QuestionBankLevel() {
     e.preventDefault();
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify({
-      "qlevel": "1",
-      "fqbid": 0
-    });
+    // var raw = JSON.stringify({
+    //   "qlevel": "1",
+    //   "fqbid": 0
+    // });
 
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
+    // var requestOptions = {
+    //   method: 'POST',
+    //   headers: myHeaders,
+    //   body: raw,
+    //   redirect: 'follow'
+    // };
+    // fetch("https://assesment-web.onrender.com/questionbanklevel/", requestOptions)
+    //   .then(response => response.text())
+    //   .then(result => console.log(result))
+    //   .catch(error => console.log('error', error));
+
+      const data = { qlevel };
+
+      fetch(`${API_BASE_URL}/questionbanklevel/`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(data => {
+       
+        const questionBankId = data?.question_bank_level_id;
+    
+       
+        if (questionBankId) {
+          localStorage.setItem('question_bank_id', questionBankId);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching question bank data:', error);
+      });
+    
+      
+      navigate(`/code/${params.lev}/code1`);
     };
-    fetch("https://assesment-web.onrender.com/questionbanklevel/", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-
-     const data={qlevel};    
-
-
-    fetch("https://assesment-web.onrender.com/questionbanklevel/", {
-      method: 'POST',
-      credentials:'same-origin',
-     
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    
-      body: JSON.stringify(data)
-    }).then(res=>console.log("success"))
-    .catch(error => console.log(error));
-
-    
-     navigate(`/code/${params.lev}/code1`)
-  }
-
   
   const Title = styled('h1')({
 

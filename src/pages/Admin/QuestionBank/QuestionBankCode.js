@@ -61,7 +61,7 @@ function QuestionBankCode() {
   const code_time = parseInt(codeTimer);
   const question_time = parseInt(questionTimer);
   
-
+  const API_BASE_URL = process.env.REACT_APP_API;
   const handleImage = (e) => {
     setcode_image(e.target.files[0]);
    
@@ -71,28 +71,37 @@ function QuestionBankCode() {
   console.log(code_image);
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    
+    const selectedCodeObject = codes.find(item => item.value === selectedcode);
+  
+   
+    const codeId = selectedCodeObject?.code_id || null;
+  
     var formdata = new FormData();
     formdata.append("code_text", code_text);
     formdata.append("code_time", code_time);
     formdata.append("question_time", question_time);
     formdata.append("code_image", code_image);
-
+  
     var requestOptions = {
       method: 'POST',
       body: formdata,
       redirect: 'follow'
     };
-
-    fetch("https://assesment-web.onrender.com/code/", requestOptions)
+  
+    fetch(`${API_BASE_URL}/code/`, requestOptions)
       .then(response => response.text())
-      .then(result => console.log(result))
+      .then(result => {
+       
+        localStorage.setItem('code_id', codeId);
+        console.log(result);
+      })
       .catch(error => console.log('error', error));
-
-    
-      navigate(`/question/${params.lev}/${params.type}`)
-    
+  
+    navigate(`/question/${params.lev}/${params.type}`);
   };
-
+  
 
 
   return (
