@@ -22,7 +22,7 @@ const Footer = ()=>{
 
     return (
 
-    <Container maxWidth="xl" sx={{bgcolor:"#212121",height:280}} position="fixed">
+    <Container maxWidth="xl" sx={{bgcolor:"#212121",height:100}} position="fixed" style={{marginTop:"50%"}}>
 
       <Box sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       
@@ -30,23 +30,23 @@ const Footer = ()=>{
 
       </Box>
 
-     <Box sx={{marginTop:"3rem"}} >
-     <Grid container spacing={2}  >
+     <Box sx={{marginTop:"1rem"}} >
+     {/* <Grid container spacing={2}  >
         
         <Grid item xs={6}>
-        
+         */}
         <Box>
         
         <Typography variant="h6" sx={{color:"#ffffff"}}>You are Logged in as User</Typography>
 
         </Box>
 
-        </Grid>
+        {/* </Grid> */}
 
 
         <Grid item xs={6} sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
         
-        <Box >
+        {/* <Box >
         <Typography variant="h6" sx={{color:"#ffffff",fontSize:"16px"}}>Some Links</Typography>  
         <Box sx={{mt:1}}>
         <Typography variant="subtitle1" sx={{color:"#ffffff",fontSize:"14px"}}>FAQ</Typography>
@@ -55,15 +55,15 @@ const Footer = ()=>{
 
         </Box>
 
-        </Box>
+        </Box> */}
 
 
-        </Grid>
+        {/* </Grid> */}
 
 
       <Grid  item xs={12} sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       
-     <Typography variant="h6" sx={{color:"#ffffff",fontStyle: 'italic',marginTop:"4rem"}}>© All Rights Reserved - Code Comprehension Assessment Portal </Typography>
+     <Typography variant="xs" sx={{color:"#ffffff",fontStyle: 'italic',marginTop:"1rem"}}>© All Rights Reserved - Code Comprehension Assessment Portal </Typography>
 
       </Grid>
 

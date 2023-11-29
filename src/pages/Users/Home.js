@@ -74,7 +74,7 @@ const Home = () => {
   // sx={{display:"flex",justifyContent:"center",
   // alignItems:"center",m:3}}
   return (
-    <Container maxWidth="xl" sx={{height:"80vh",}}>
+    <Container maxWidth="xl" sx={{height:"60vh",}}>
      
      <Box sx={{m:3,p:1}}>
       <Title>Fully Automated Online Assessment System</Title>
