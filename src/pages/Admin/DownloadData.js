@@ -1,4 +1,3 @@
-
 import download from "downloadjs";
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
@@ -9,7 +8,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
- import { useEffect, useState } from 'react';
 import { Button } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -26,7 +24,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
@@ -45,98 +42,51 @@ const rows = [
 ];
 
 const DownloadData = () => {
+  const [userData, setUserData] = React.useState([]);
 
-
-
-
-    const [userData, setUserData] = useState([]);
-    const [downloadData, setDownloadData] = useState([]);
-    useEffect(() => {
-        var myHeaders = new Headers();
-
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
-
-        fetch("https://summerinternshipproject.pythonanywhere.com/getcsv/", requestOptions)
-            .then(response => response.json())
-            .then(result => setUserData(result))
-            .catch(error => console.log('error', error));
-
-        // console.log(userData)
-    }, [])
-
-        const handleClick = (e) => {
-        var myHeaders = new Headers();
-
-        const id = e.target.value;
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
-
-        fetch(`https://summerinternshipproject.pythonanywhere.com/download/?user=${id}`, requestOptions)
-            .then(response => response.text())
-            .then(result => download(result, "data.csv", "text/csv"))
-            .catch(error => console.log('error', error));
-    
-            console.log(downloadData);
-        }
-
-
-
-
-
-
-
-
-
-
-
-      console.log(userData);
-
-
-
-
-
+  const handleDownloadAll = () => {
+    fetch("https://assesment-web.onrender.com/download/", {
+      method: 'GET',
+    })
+      .then(response => response.text())
+      .then(result => download(result, "all_data.csv", "text/csv"))
+      .catch(error => console.log('error', error));
+  };
+  
+  const handleDownload = () => {
+    fetch("https://assesment-web.onrender.com/usersdata")
+      .then(response => response.json())
+      .then(result => download(JSON.stringify(result), "all_data.csv", "text/csv"))
+      .catch(error => console.log('error', error));
+  };
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 300 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
-            {/* <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell> */}
-            <StyledTableCell align="right">Download Csv</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {userData.map((user) => (
-            <StyledTableRow key={user.name}>
-              <StyledTableCell component="th" scope="row">
-                {user.name}
-              </StyledTableCell>
-              {/* <StyledTableCell align="right">{row.calories}</StyledTableCell> */}
-              {/* <StyledTableCell align="right">{row.fat}</StyledTableCell> */}
-              <StyledTableCell align="right">{user.email}</StyledTableCell>
-              <StyledTableCell align="right">
-
-
-              <Button sx={{ m: 1 }} variant="contained" color="primary" size="large" 
-              onClick={handleClick} value={user.uid}>Download</Button>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      <a
+        href="https://assesment-web.onrender.com/usersdata"
+        download="all_data.csv"
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ margin: '20px' }}
+        >
+          Download All CSV
+        </Button>
+      </a>
+      <Button
+        
+        variant="contained"
+        color="primary"
+        style={{ margin: '20px' }}
+        onClick={handleDownloadAll}
+      >
+        Download Test result
+      </Button>
+      
+      {/* Rest of your table rendering code */}
+    </div>
   );
-}
+};
 
 export default DownloadData;
-

@@ -6,6 +6,8 @@ import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-countr
 import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
 
+const API_BASE_URL = process.env.REACT_APP_API;
+
 const Register = () => {
 
     const [name, setName] = useState('');
@@ -24,7 +26,7 @@ const Register = () => {
 
     const calculatingAge = useSelector(state => state.calculatingAge);
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) => {
 
         e.preventDefault();
 
@@ -80,27 +82,43 @@ const Register = () => {
         }
 
         if (filter === 0) {
-
             if (tnc === false) {
                 alert('Please check the terms and conditions box');
-            }
-            else {
-                fetch('https://summerinternshipproject.pythonanywhere.com/demographic/', {
+            } else {
+                const data = { name, email, dob, age, gender, country, state, profession };
+    
+                try {
+                    const response = await fetch(`${API_BASE_URL}/demographic/`, {
                         method: 'POST',
-                        headers: { "Content-Type": "application/json" }, 
+                        headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(data)
-                    }).then(() => {
-                        console.log('Registered');
-                    })
-
-
-                alert('Registered successfully');
-                dispatch({ type: "SETTING_REGISTERED_NAME", val: "Hi " + name + " !" });
-                navigate("/expertise");
+                    });
+    
+                    if (response.ok) {
+                        const responseData = await response.json();
+                        const { user_id } = responseData; 
+    
+                        if (user_id) {
+                            localStorage.setItem('user_id', user_id);
+                            console.log('Registered successfully with user ID:', user_id);
+    
+                            dispatch({ type: "SETTING_REGISTERED_NAME", val: "Hi " + name + " !" });
+                            navigate("/expertise");
+                        } else {
+                            console.error('User ID not found in the response');
+                            alert('User ID not found. Registration might not have been completed successfully.');
+                        }
+                    } else {
+                        console.error('Registration failed with status:', response.status);
+                        alert('Registration failed. Please try again later.');
+                    }
+                } catch (error) {
+                    console.error('Error during registration:', error);
+                    alert('An error occurred during registration. Please try again later.');
+                }
             }
         }
-    }
-
+    };
     const checkboxHandler = () => {
         setTnc(!tnc);
     }
@@ -180,7 +198,7 @@ const Register = () => {
 
 
     return (
-        <div className='create'>
+        <div className='create' style={{minHeight:"100vh"}}>
 
             <form className='.formcss'>
                 <h1>Register</h1>
@@ -276,9 +294,8 @@ const Register = () => {
                 >
                     <option value="----Select----" selected disabled>--Select--</option>
                     <option value="1">Student</option>
-                    <option value="3">Professor</option>
+                    <option value="3">Academician</option>
                     <option value="2">Industrialist</option>
-
                 </select>
 
                 <label id="Tnc"><input type="checkbox" id="cbox"

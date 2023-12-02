@@ -31,7 +31,7 @@ function AdminNavbar() {
   
     const saveFile = () => {
         saveAs(
-          "https://summerinternshipproject.pythonanywhere.com/download",
+          "https://assesment-web.onrender.com/download",
           "data.csv"
         );
       };
@@ -40,9 +40,7 @@ function AdminNavbar() {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
           
-                <IconButton size="large" sx={{ p: 1 }}>
-                  <Avatar  alt="IIITV" src={img_url}/>
-                </IconButton>
+              
             
 
             <Typography
@@ -60,10 +58,10 @@ function AdminNavbar() {
                 textDecoration: 'none',
               }}
             >
-              RECRUITMENT.IIITV.AC.IN
+             Code Comprehension Assessment Portal
             </Typography>
   
-          <Box sx={{ml:"600px"}}>
+          <Box sx={{ml:"400px"}}>
             <Link to={"/downloadData"} style={{ textDecoration: 'none' }}>
           <Button  variant="contained"  
           // onClick={saveFile}
