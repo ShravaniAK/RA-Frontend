@@ -24,8 +24,8 @@ const API_BASE_URL = process.env.REACT_APP_API;
 function QuestionBankLanguage() {
   const navigate = useNavigate();
   const options = [
-    { name: "C++", value: '1' },
-    { name: "Python", value: '2' },
+    { name: "C++", value: '2' },
+    { name: "Python", value: '1' },
     { name: "Javascript", value: '3' },
   ];
   const [selectedLanguage, setSelectedLanguage] = useState("");

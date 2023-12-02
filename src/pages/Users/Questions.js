@@ -22,6 +22,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ClipLoader, ScaleLoader } from 'react-spinners';
 import { useDispatch } from "react-redux";
+import ThankYouPage from '../../components/Thankyou';
 
 const API_BASE_URL = process.env.REACT_APP_API;
 
@@ -43,7 +44,7 @@ const theme = createTheme({
 
 
 const Questions = () => {
-
+  const [testCompleted, setTestCompleted] = useState(false);
   const dispatch = useDispatch();
   const [response1, setResponse1] = useState(null);
   const [response2, setResponse2] = useState(null);
@@ -136,10 +137,12 @@ const Questions = () => {
   const [valid, setValid] = useState(false);
 
   async function getData() {
+    console.log(localStorage.getItem('cid'));
 
     let updated = [];
+    const fcid=localStorage.getItem('cid')
     for (let val = 0; val <= 4; val++) {
-      const response = await fetch(`${API_BASE_URL}/getquestion/?question=${val}`);
+      const response = await fetch(`${API_BASE_URL}/getquestion/?question=${val}&fcid=${fcid}`);
       const data = await response.json();
 
       updated.push(data);
@@ -219,16 +222,20 @@ const Questions = () => {
 
     }
 
-
+    setTestCompleted(true);
   }
   console.log(items);
   return (
 
     <ThemeProvider theme={theme}>
-
-      {
-        loading ? (<Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "80vh" }}> <ScaleLoader loading={loading} size={100} /> </Box>) :
-          (
+    {loading ? (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+        <ScaleLoader loading={loading} size={100} />
+      </Box>
+    ) : testCompleted ? (
+      // Render the Thank You page when testCompleted is true
+      <ThankYouPage />
+    ) : (
             <Container maxWidth="lg" sx={{ bgcolor: "primary.main", height: "325vh", mt: 4, mb: 2, borderRadius: 2, boxShadow: 7 }}>
 
               {/* /* <Box sx={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
@@ -272,7 +279,7 @@ const Questions = () => {
 
               {valid && <Question5 item={items[4]} response5={response5} onChangeResponse5={response5Handler} />}
 
-
+             
               <Box sx={{
                 bgcolor: '#fffde7', width: "100%",
                 height: 100,
@@ -296,16 +303,10 @@ const Questions = () => {
 
               </Box>
 
-            </Container>
-
-          )
-
-      }
-
-
-
+              </Container>
+      )}
     </ThemeProvider>
   );
-}
+};
 
 export default Questions;

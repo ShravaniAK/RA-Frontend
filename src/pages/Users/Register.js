@@ -198,7 +198,7 @@ const Register = () => {
 
 
     return (
-        <div className='create'>
+        <div className='create' style={{minHeight:"100vh"}}>
 
             <form className='.formcss'>
                 <h1>Register</h1>

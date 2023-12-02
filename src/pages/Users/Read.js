@@ -85,6 +85,7 @@ const Read = () => {
         return res.json();
       })
       .then(dta => {
+        localStorage.setItem("cid",dta.cid)
         console.log(dta);
         setCodedata(dta);
         //setIsLaoding(false);
@@ -132,15 +133,18 @@ const Read = () => {
                 <Grid item xs={8}  >
                   <Paper elevation={5}>
                     <Box sx={{
-                      bgcolor: '#212121', width: "100%",
-                      height: 500,
-                      overflow: "auto",
-                      border: "0",
-                      borderRadius: "1%",
-                      boxShadow: 5,
-                    }}  >
+                  bgcolor: '#212121',
+                  width: "100%",
+                  height: 500, 
+                  overflow: "auto",
+                  border: "0",
+                  borderRadius: "1%",
+                  boxShadow: 5,
+                }}  >
 
-                      <Image src={codedata && url} alt="code"></Image>
+                      <Image style={{width: "100%",
+                  height: 500, 
+                  overflow: "auto",}} src={codedata && url} alt="code"></Image>
 
                     </Box>
                   </Paper>
