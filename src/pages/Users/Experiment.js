@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react";
 
 import { Box, Container, Grid, ButtonGroup, Typography } from "@mui/material";
@@ -55,10 +56,10 @@ const Experiment = () => {
     let value;
     switch (language) {
       case 'C++':
-        value = '1';
+        value = '2';
         break;
       case 'Python':
-        value = '2';
+        value = '1';
         break;
       case 'JavaScript':
         value = '3';

@@ -128,14 +128,14 @@ const img_url="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJ
 
       <Box >
     
-      <Box sx={{display:"flex",mt:4,ml:8,mb:2}}>
+      {/* <Box sx={{display:"flex",mt:4,ml:8,mb:2}}>
       <Image src={img_url}></Image>
       <Box sx={{display:"flex",alignItems:"center",
       justifyContent:"center",ml:2}}>
       <Description>IIIT VADODARA</Description>
       </Box>
       
-      </Box> 
+      </Box>  */}
      
 
 

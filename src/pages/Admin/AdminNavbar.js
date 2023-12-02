@@ -63,7 +63,7 @@ function AdminNavbar() {
               RECRUITMENT.IIITV.AC.IN
             </Typography>
   
-          <Box sx={{ml:"600px"}}>
+          <Box sx={{ml:"400px"}}>
             <Link to={"/downloadData"} style={{ textDecoration: 'none' }}>
           <Button  variant="contained"  
           // onClick={saveFile}

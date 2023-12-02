@@ -58,7 +58,7 @@ const Navbar = () => {
 
 
           <Box sx={{marginLeft:"auto",display:"flex",justifyContent:"center",alignItems:"center"}}>
-          <Typography variant="h6">{registerName}</Typography>  
+          <Typography variant="h6" >{registerName}</Typography>  
           {/* <IconButton size="large" sx={{ p: 1 }}>
                 <Avatar  alt="IIITV" src={avt_url}/>
           </IconButton> */}
