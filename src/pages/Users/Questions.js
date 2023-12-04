@@ -236,7 +236,7 @@ const Questions = () => {
       // Render the Thank You page when testCompleted is true
       <ThankYouPage />
     ) : (
-            <Container maxWidth="lg" sx={{ bgcolor: "primary.main", height: "325vh", mt: 4, mb: 2, borderRadius: 2, boxShadow: 7 }}>
+            <Container maxWidth="lg" sx={{ bgcolor: "primary.main", height: "355vh", mt: 4, mb: 2, borderRadius: 2, boxShadow: 7 }}>
 
               {/* /* <Box sx={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
             <Typography variant="h3">Questions</Typography>
