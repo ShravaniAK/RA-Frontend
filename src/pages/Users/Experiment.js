@@ -153,7 +153,7 @@ const Experiment = () => {
   return (
     <>
 
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" style={{minHeight:"140vh"}}>
 
         <Box sx={{
           width: '100%',
