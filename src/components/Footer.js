@@ -13,11 +13,9 @@ const FooterContainer = styled(Container)({
 
 const Footer = () => {
   return (
-    <FooterContainer maxWidth="xl">
+    <FooterContainer maxWidth="xxl">
       <Grid container justifyContent="center" alignItems="center" spacing={2}>
-        <Grid item xs={12} md={6}>
-          <Typography variant="h6">You are Logged in as User</Typography>
-        </Grid>
+       
         <Grid item xs={12} md={6} container justifyContent="center">
          
         </Grid>
