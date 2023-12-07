@@ -1,51 +1,50 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Paper, FormControlLabel, Radio, Select, MenuItem, FormControl, InputLabel, TextField } from '@mui/material';
 
-  const OtherLayout = ({ onDataChange, lang }) => {
-    const [level, setLevel] = useState('');
-    const [duration, setDuration] = useState('');
-    const [time, setTime] = useState('');
-    const [last_used, setLast_used] = useState('');
-  
-    const handleDataChange = () => {
-      const data = {
-        selectedLanguage: lang,
-        level,
-        duration,
-        time,
-        last_used,
-      };
-      onDataChange(data); 
-    };
+const OtherLayout = ({ onDataChange, lang }) => {
+  const [level, setLevel] = useState('');
+  const [duration, setDuration] = useState('');
+  const [time, setTime] = useState('');
+  const [lastUsed, setLastUsed] = useState('');
 
+  const handleDataChange = () => {
+    const data = {
+      selectedLanguage: lang,
+      level,
+      duration,
+      time,
+      lastUsed,
+    };
+    onDataChange(data); 
+  };
 
-  
-    const handleLevelChange = (e) => {
-      setLevel(e.target.value);
-      handleDataChange();
-    };
-  
-    const handleDurationChange = (e) => {
-      setDuration(e.target.value);
-      handleDataChange();
-    };
-  
-    const handleTimeChange = (e) => {
-      setTime(e.target.value);
-      handleDataChange();
-    };
-  
-    const handleLastUsedChange = (e) => {
-      setLast_used(e.target.value);
-      handleDataChange();
-    };
-  
+  const handleLevelChange = (e) => {
+    setLevel(e.target.value);
+    handleDataChange();
+  };
+
+  const handleDurationChange = (e) => {
+    setDuration(e.target.value);
+    handleDataChange();
+  };
+
+  const handleTimeChange = (e) => {
+    setTime(e.target.value);
+    handleDataChange();
+  };
+
+  const handleLastUsedChange = (e) => {
+    setLastUsed(e.target.value);
+    handleDataChange();
+  };
 
   return (
     <Grid container spacing={2} style={{ padding: '10px', marginTop: '10px' }}>
       <Grid item xs={12} sm={6} md={3}>
         <Paper elevation={3} style={{ padding: 6, height: 70 }}>
-          <Typography variant="subtitle2">Language Name</Typography>
+        <Typography variant="h6" gutterBottom>
+          Language Name: {lang} 
+        </Typography>
           <FormControlLabel
             sx={{ m: 1, minWidth: 170, '@media (min-width:600px)': { minWidth: '10vw' } }}
             value="female"
@@ -139,7 +138,7 @@ import { Grid, Typography, Paper, FormControlLabel, Radio, Select, MenuItem, For
             InputLabelProps={{
               shrink: true,
             }}
-            value={last_used || ''}
+            value={lastUsed || ''}
             onChange={handleLastUsedChange}
           />
         </Paper>

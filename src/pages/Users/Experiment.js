@@ -20,7 +20,7 @@ const Experiment = () => {
   const [strtime, setStrTime] = React.useState(0);
   const [last_used, setLast_used] = React.useState('');
   const [duration, setDuration] = React.useState('');
-  const [otherLayoutData, setOtherLayoutData] = useState([]);
+  
 
   const API_BASE_URL = process.env.REACT_APP_API;
 
@@ -30,16 +30,7 @@ const Experiment = () => {
   const navigate = useNavigate();
 
 
-  const handleOtherLayoutData = (data) => {
-    const updatedData = otherLayoutData.filter((entry) => entry.level === '' && entry.duration === '' && entry.time === '' && entry.last_used === '');
-    updatedData.push({
-      level: data.level || '',
-      duration: data.duration || '',
-      time: data.time || '',
-      last_used: data.last_used || '',
-    });
-    setOtherLayoutData(updatedData);
-  };
+  
 
   const [selectedLanguage, setSelectedLanguage] = useState();
   // useEffect(() => {
@@ -102,7 +93,7 @@ const Experiment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const expertiseData = { selectedLanguage, level, duration, time, last_used ,otherLayoutData: [...otherLayoutData],};
+    const expertiseData = { selectedLanguage, level, duration, time, last_used };
     const emptyData = { ffuid: null, ffqbid: null };
     emptyData.ffuid = localStorage.getItem('user_id');
 
@@ -143,6 +134,7 @@ const Experiment = () => {
     }
   };
 
+  
   return (
     <>
 
@@ -205,11 +197,7 @@ const Experiment = () => {
       }} > */}
 
 
-          <Typography variant="h4" component="h2" marginLeft={2} marginTop={3} color="common.white">
-
-          Other Language
-        </Typography>
-
+         
 
 
 
@@ -222,12 +210,7 @@ const Experiment = () => {
         <Layout lang="Javascript"></Layout> */}
 
 
-          <OtherLayout onDataChange={handleOtherLayoutData} lang="JAVA"/>
-       <OtherLayout onDataChange={handleOtherLayoutData} lang="Python"/>
-       <OtherLayout onDataChange={handleOtherLayoutData} lang="Javascript" />
-       <OtherLayout onDataChange={handleOtherLayoutData} lang="Ruby"  />
-       <OtherLayout onDataChange={handleOtherLayoutData} lang="c++"  />
-
+         
 
 
 
@@ -255,12 +238,10 @@ const Experiment = () => {
       }} > */}
 
           <div className="btns" style={{ margin: '2.4rem' }}>
-            <Link to={"/register"} style={{ textDecoration: 'none' }}>
-              <Button variant="contained" size="large" color="secondary" sx={{ mr: 2 }} >Back</Button>
-            </Link>
-            {/* <Link to={"/level/Easy"}> */}
+           
 
             <Button variant="contained" color="success" size="large" sx={{ ml: 2 }} onClick={handleSubmit} >Next</Button>
+           
             {/* </Link> */}
           </div>
 
