@@ -1,170 +1,150 @@
-import React, { useState } from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Radio from '@mui/material/Radio';
+import React, { useState } from 'react';
+import { Grid, Typography, Paper, FormControlLabel, Radio, Select, MenuItem, FormControl, InputLabel, TextField } from '@mui/material';
 
-import Paper from '@mui/material/Paper';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+const OtherLayout = ({ onDataChange, lang }) => {
+  const [level, setLevel] = useState('');
+  const [duration, setDuration] = useState('');
+  const [time, setTime] = useState('');
+  const [lastUsed, setLastUsed] = useState('');
 
-import TextField from '@mui/material/TextField';
+  const handleDataChange = () => {
+    const data = {
+      selectedLanguage: lang,
+      level,
+      duration,
+      time,
+      lastUsed,
+    };
+    onDataChange(data); 
+  };
 
+  const handleLevelChange = (e) => {
+    setLevel(e.target.value);
+    handleDataChange();
+  };
 
-const OtherLayout = (props)=>{
+  const handleDurationChange = (e) => {
+    setDuration(e.target.value);
+    handleDataChange();
+  };
 
-  const [level,setLevel] = useState();
-   
-  const [duration,setDuration] = useState(); 
+  const handleTimeChange = (e) => {
+    setTime(e.target.value);
+    handleDataChange();
+  };
 
-  const [time,setTime] = useState(); 
+  const handleLastUsedChange = (e) => {
+    setLastUsed(e.target.value);
+    handleDataChange();
+  };
 
-  
-  const [last_used,setLast_used] = useState();
+  return (
+    <Grid container spacing={2} style={{ padding: '10px', marginTop: '10px' }}>
+      <Grid item xs={12} sm={6} md={3}>
+        <Paper elevation={3} style={{ padding: 6, height: 70 }}>
+        <Typography variant="h6" gutterBottom>
+          Language Name: {lang} 
+        </Typography>
+          <FormControlLabel
+            sx={{ m: 1, minWidth: 170, '@media (min-width:600px)': { minWidth: '10vw' } }}
+            value="female"
+            control={<Radio />}
+            label={lang}
+          />
+        </Paper>
+      </Grid>
 
-  // const handleChangeLevel = (event) => {
-  //   setLevel(event.target.value);
-  // };
+      <Grid item xs={12} sm={6} md={3}>
+        <Paper elevation={3} style={{ padding: 6, height: 70 }}>
+          <Typography variant="subtitle2">Level</Typography>
+          <FormControl
+            sx={{ m: 1, minWidth: 170, '@media (min-width:600px)': { minWidth: '10vw' } }}
+            size="small"
+          >
+            <InputLabel id="level-select-label">Level</InputLabel>
+            <Select
+              labelId="level-select-label"
+              id="level-select"
+              value={level}
+              label="Level"
+              // onChange={(e) => setLevel(e.target.value)}
+              onChange={handleLevelChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="1">Novice</MenuItem>
+              <MenuItem value="2">Intermediate</MenuItem>
+              <MenuItem value="3">Advanced</MenuItem>
+            </Select>
+          </FormControl>
+        </Paper>
+      </Grid>
 
-  // const [duration, setDuration] = React.useState('');
+      <Grid item xs={12} sm={6} md={3}>
+        <Paper elevation={3} style={{ padding: 6, height: 70 }}>
+          <Typography variant="subtitle2">Duration</Typography>
+          <FormControl
+            sx={{ m: 1, minWidth: 170, '@media (min-width:600px)': { minWidth: '10vw' } }}
+            size="small"
+          >
+            <InputLabel id="duration-select-label">Duration</InputLabel>
+            <Select
+              labelId="duration-select-label"
+              id="duration-select"
+              value={duration}
+              label="Duration"
+              // onChange={(e) => setDuration(e.target.value)}
+              onChange={handleDurationChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={1}>&lt; 1 year</MenuItem>
+              <MenuItem value={2}>1 - 3 years</MenuItem>
+              <MenuItem value={3}>&gt; 3 years</MenuItem>
+            </Select>
+          </FormControl>
+        </Paper>
+      </Grid>
 
-  // const handleChangeDuration = (event) => {
-  //   setDuration(event.target.value);
-  // };  
+      <Grid item xs={12} sm={6} md={3}>
+        <Paper elevation={3} style={{ padding: 6, height: 70 }}>
+          <Typography variant="subtitle2">Time</Typography>
+          <TextField
+            id="time-input"
+            label="Time"
+            variant="outlined"
+            size="small"
+            sx={{ m: 1, minWidth: 170, '@media (min-width:600px)': { minWidth: '10vw' } }}
+            value={time}
+            onChange={handleTimeChange}
+            inputProps={{
+              type: 'text'
+            }}
+          />
+        </Paper>
+      </Grid>
 
-return (
-
-<Grid container spacing={2}  style={{padding:"10px",marginTop:"10px"}} >
-
-<Grid item xs={2.4}>
-
-<Paper elevation={3} style={{padding:6,height:70,
-
-}}>
- 
-<Typography variant="subtitle2" >Language Name</Typography> 
-<FormControlLabel sx={{ m: 1, minWidth: 170, '@media (min-width:600px)': {
-  minWidth: "10vw",
-}, }} value="female" control={<Radio />} label={props.lang} />
-
-</Paper> 
-
-
-</Grid>
-
-<Grid item xs={2.4}>
-
-<Paper elevation={3} style={{padding:6,height:70}}>
- 
-<Typography variant="subtitle2" >Level</Typography> 
-<FormControl sx={{ m: 1, minWidth: 170, '@media (min-width:600px)': {
-  minWidth: "10vw",
-}, }} size="small">
-      <InputLabel id="demo-select-small">Level</InputLabel>
-      <Select
-        labelId="demo-select-small"
-        id="demo-select-small"
-        value={level}
-        
-        label="Level"
-        onChange={(e)=> setLevel(e.target.value)}
-      >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value={1}>Novice</MenuItem>
-        <MenuItem  value={2}>Intermediate</MenuItem>
-        <MenuItem  value={3}>Advance</MenuItem>
-      </Select>
-    </FormControl>
-
-</Paper> 
-
-  </Grid>
-
-
-  <Grid item xs={2.4}>
- 
-  <Paper elevation={3} style={{padding:6,height:70}}>
- 
-<Typography variant="subtitle2" >Duration</Typography> 
-<FormControl sx={{ m: 1, minWidth: 170 , '@media (min-width:600px)': {
-  minWidth: "10vw",
-}, }} size="small">
-      <InputLabel id="demo-select-small">Duration</InputLabel>
-      <Select
-        labelId="demo-select-small"
-        id="demo-select-small"
-        value={duration}
-        
-        label="duration"
-        onChange={(e)=>setDuration(e.target.value)}
-      >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value={1}> &lt; 1 years</MenuItem>
-        <MenuItem  value={2}>1 - 3 years</MenuItem>
-        <MenuItem  value={3}>&gt; 3years</MenuItem>
-      </Select>
-    </FormControl>
-
-</Paper> 
-
-
-  </Grid>
-  <Grid item xs={2.4}>
-    
-  <Paper elevation={3} style={{padding:6,height:70}}>
- 
- <Typography variant="subtitle2" >Time</Typography> 
- <TextField id="outlined-basic" 
- label="Outlined"
-  variant="outlined" 
- size="small" sx={{ m: 1, minWidth: 170, '@media (min-width:600px)': {
-  minWidth: "10vw",
-}, }} 
- value={time}
- onChange={(e)=>setTime(e.target.value)}
- 
- />
- 
- </Paper> 
-
-  </Grid>
-
-  <Grid item xs={2.4}>
-  <Paper elevation={3} style={{padding:6,height:70}}>
-
-  <Typography variant="subtitle2" >Last Used</Typography>  
-  <TextField
-        id="date"
-        label="LastUsed"
-        type="date"
-        size="small"
-        sx={{ m: 1, minWidth: 170 }}
-        
-        InputLabelProps={{
-          shrink: true,
-        }}
-        
-        value={last_used}
-        onChange={(e)=>setLast_used(e.target.value)}
-      />
-
-      </Paper>
-
-
-
- 
-  </Grid>
-</Grid>
-
- 
-
-)
-
-}
+      <Grid item xs={12} sm={6} md={3}>
+        <Paper elevation={3} style={{ padding: 6, height: 70 }}>
+          <Typography variant="subtitle2">Last Used</Typography>
+          <TextField
+            id="last-used-date"
+            label="Last Used"
+            type="date"
+            size="small"
+            sx={{ m: 1, minWidth: 170, '@media (min-width:600px)': { minWidth: '10vw' } }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={lastUsed || ''}
+            onChange={handleLastUsedChange}
+          />
+        </Paper>
+      </Grid>
+    </Grid>
+  );
+};
 
 export default OtherLayout;

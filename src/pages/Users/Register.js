@@ -103,7 +103,7 @@ const Register = () => {
                             console.log('Registered successfully with user ID:', user_id);
     
                             dispatch({ type: "SETTING_REGISTERED_NAME", val: "Hi " + name + " !" });
-                            navigate("/expertise");
+                            navigate("/otherlayout");
                         } else {
                             console.error('User ID not found in the response');
                             alert('User ID not found. Registration might not have been completed successfully.');

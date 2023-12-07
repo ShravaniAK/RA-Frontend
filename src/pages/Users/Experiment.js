@@ -12,6 +12,7 @@ import OtherLayout from "../../components/OtherLayout";
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 
+
 const Experiment = () => {
   const [ffuid, setFfuid] = useState(null);
   const [plang, setPlang] = React.useState(null);
@@ -19,6 +20,7 @@ const Experiment = () => {
   const [strtime, setStrTime] = React.useState(0);
   const [last_used, setLast_used] = React.useState('');
   const [duration, setDuration] = React.useState('');
+  
 
   const API_BASE_URL = process.env.REACT_APP_API;
 
@@ -27,6 +29,8 @@ const Experiment = () => {
   //console.log(level);
   const navigate = useNavigate();
 
+
+  
 
   const [selectedLanguage, setSelectedLanguage] = useState();
   // useEffect(() => {
@@ -71,7 +75,6 @@ const Experiment = () => {
     setSelectedLanguage(value);
   };
 
-
   const handleLevel = (newLev) => {
     setLevel(newLev);
   }
@@ -86,25 +89,6 @@ const Experiment = () => {
   }
 
   const time = parseInt(strtime);
-
-  // useEffect(() => {
-  //   const fetchUid = async () => {
-  //     try {
-  //       const response = await fetch('https://assesment-web.onrender.com/demographic/');
-  //       const data = await response.json();
-  //       const uid = data[0]?.uid;
-  //       console.log('Fetched uid:', uid);
-  //       setFfuid(uid);
-  //       localStorage.setItem('ffuid', uid);
-  //     } catch (error) {
-  //       console.error('Error:', error);
-  //     }
-  //   };
-
-  //   fetchUid();
-  // }, []);
-
-
 
 
   const handleSubmit = async (e) => {
@@ -130,7 +114,7 @@ const Experiment = () => {
 
       if (evaluationInitResponse.ok) {
         const evaluationInitData = await evaluationInitResponse.json();
-        const { evaluation_id } = evaluationInitData; // Assuming API response contains evaluation_id
+        const { evaluation_id } = evaluationInitData; 
         console.log(evaluationInitData);
         if (evaluation_id) {
           localStorage.setItem('evaluation_id', evaluation_id);
@@ -150,10 +134,11 @@ const Experiment = () => {
     }
   };
 
+  
   return (
     <>
 
-      <Container maxWidth="lg" style={{minHeight:"140vh"}}>
+      <Container maxWidth="lg" style={{minHeight:"240vh"}}>
 
         <Box sx={{
           width: '100%',
@@ -212,11 +197,7 @@ const Experiment = () => {
       }} > */}
 
 
-          {/* <Typography variant="h4" component="h2" marginLeft={2} marginTop={3} color="common.white">
-
-          Other Language
-        </Typography> */}
-
+         
 
 
 
@@ -229,11 +210,7 @@ const Experiment = () => {
         <Layout lang="Javascript"></Layout> */}
 
 
-          {/* <OtherLayout lang="JAVA"/>
-       <OtherLayout lang="Python"/>
-       <OtherLayout lang="Javascript"/  >
-       <OtherLayout lang="Ruby"  /> */}
-
+         
 
 
 
@@ -261,12 +238,10 @@ const Experiment = () => {
       }} > */}
 
           <div className="btns" style={{ margin: '2.4rem' }}>
-            <Link to={"/register"} style={{ textDecoration: 'none' }}>
-              <Button variant="contained" size="large" color="secondary" sx={{ mr: 2 }} >Back</Button>
-            </Link>
-            {/* <Link to={"/level/Easy"}> */}
+           
 
             <Button variant="contained" color="success" size="large" sx={{ ml: 2 }} onClick={handleSubmit} >Next</Button>
+           
             {/* </Link> */}
           </div>
 

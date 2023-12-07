@@ -1,0 +1,46 @@
+/* Add your CSS styles in a separate file or style block */
+
+/* Example styles for form container */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Example styles for form labels */
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  /* Example styles for form inputs */
+  input[type="text"],
+  select,
+  input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Example styles for submit button */
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Example styles for responsive design */
+  @media screen and (max-width: 768px) {
+    .form-container {
+      padding: 10px;
+    }
+    /* Add more responsive styles as needed */
+  }
+  

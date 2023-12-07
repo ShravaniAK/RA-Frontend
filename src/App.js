@@ -20,6 +20,8 @@ import { useSelector } from "react-redux";
 import DownloadData from "./pages/Admin/DownloadData";
 import React from "react"
 import About from "./components/About";
+import OtherLayout from "./components/OtherLayout";
+import OtherLayoutPage from "./pages/Users/OtherLayoutPage";
 
 
 function App() {
@@ -55,6 +57,7 @@ function App() {
 
         <Route path="/register" element={<Register />} />
         <Route path="/About" element={<About />} />
+        <Route path="/otherlayout" element={<OtherLayoutPage />} />
         <Route path="/expertise" element={<Experiment />} />
         <Route path="/level/:type" element={<Level />} />
         <Route path="/codeRead/:type/:option" element={<Read />} />
