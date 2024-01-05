@@ -104,7 +104,7 @@ const Read = () => {
   var qs_time = 0;
   if (codedata != null) {
     //setCodedata(codedata.code_image);
-    url = mainUrl + codedata.code_image;
+    url = codedata.code_image;
     c_time = codedata.code_time;
     qs_time = codedata.question_time;
     dispatch({ type: "SENDING_QUESTION_TIME", val: qs_time });

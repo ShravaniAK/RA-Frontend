@@ -12,7 +12,7 @@ const OtherLayoutPage = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [level, setLevel] = useState('');
   const [duration, setDuration] = useState('');
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState(0);
   const [date, setDate] = useState('');
 
   const handleSubmit = async (e) => {
@@ -34,13 +34,14 @@ const OtherLayoutPage = () => {
     }
   };
 
+  
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <label htmlFor="languageSelect">Language:</label>
       <select id="languageSelect" value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
         <option value="">Select a language</option>
         {languages.map((language, index) => (
-          <option key={index} value={language}>
+          <option key={index} value={index+1}>
             {language}
           </option>
         ))}
@@ -50,7 +51,7 @@ const OtherLayoutPage = () => {
       <select id="levelSelect" value={level} onChange={(e) => setLevel(e.target.value)}>
         <option value="">Select level</option>
         {levels.map((level, index) => (
-          <option key={index} value={level}>
+          <option key={index} value={index + 1}>
             {level}
           </option>
         ))}
@@ -60,7 +61,7 @@ const OtherLayoutPage = () => {
       <select id="durationSelect" value={duration} onChange={(e) => setDuration(e.target.value)}>
         <option value="">Select duration</option>
         {durations.map((duration, index) => (
-          <option key={index} value={duration}>
+          <option key={index} value={index+1}>
             {duration}
           </option>
         ))}
