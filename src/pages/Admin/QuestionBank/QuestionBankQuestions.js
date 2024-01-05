@@ -18,6 +18,7 @@ import { useParams } from 'react-router-dom';
 import { Box } from '@mui/system';
 import { Paper } from '@mui/material';
 import { styled } from '@mui/system';
+import { Link } from "react-router-dom"
 
 const API_BASE_URL = process.env.REACT_APP_API;
 
@@ -330,14 +331,19 @@ function QuestionBankQuestions() {
 
 
 
-
+    
+            <Link to={'/languageSelection'} style={{ textDecoration: 'none' }}>
+        <Button variant="contained" size="large" color="secondary" sx={{ mr: 2 }}>
+          Back
+        </Button>
+      </Link> 
          
            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", mt: 4 }}>
               <Button type="submit" variant="contained" color="primary" size="large" onClick={handleSubmit} >
                 Next
               </Button>
             </Box>
-
+          
 
 
         </Box>
