@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './MyForm.css'
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom"
-const languages = ['c++', 'java', 'javascript', 'ruby', 'Go', 'Python'];
+const languages = ['Python','c++','javascript','java','ruby', 'Go' ];
 const levels = ['Beginner', 'Intermediate', 'Advanced'];
 const durations = ['< 1 year', '1 - 3 years', '> 3 years'];
 
