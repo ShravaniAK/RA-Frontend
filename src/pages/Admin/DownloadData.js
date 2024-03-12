@@ -62,6 +62,18 @@ const DownloadData = () => {
 
   return (
     <div>
+       <a
+        href="https://assesment-web.onrender.com/getQuestionSheet"
+        download="all_data.csv"
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ margin: '20px' }}
+        >
+          Download Question Bank
+        </Button>
+      </a>
       <a
         href="https://assesment-web.onrender.com/usersdata"
         download="all_data.csv"
@@ -74,6 +86,7 @@ const DownloadData = () => {
           Download All CSV
         </Button>
       </a>
+
       <Button
         
         variant="contained"
