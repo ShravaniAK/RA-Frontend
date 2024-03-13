@@ -223,6 +223,12 @@ function QuestionBankCode() {
        <label htmlFor="select-image"></label>  
        <input type="file" accept=".png,.jpg,.jpeg,.pdf" id="select-image" onChange={handleImage} />
        </Box> 
+
+       <Link to={'/levels/:lev'} style={{ textDecoration: 'none' }}>
+        <Button variant="contained" size="large" color="secondary" sx={{ mr: 2 }}>
+          Back
+        </Button>
+      </Link> 
         <Button type="submit" variant="contained" color="primary" size="large" onClick={handleSubmit} >
           Next
         </Button>
