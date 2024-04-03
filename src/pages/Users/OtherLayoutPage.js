@@ -36,6 +36,14 @@ const OtherLayoutPage = () => {
 
   
   return (
+    <div>
+<ul style={{margin:"1rem"}}>
+  <li>1. select all the languages that you know and click on submit button after filling up the form for each language.</li>
+  <li>2. for exapmle , if you know 3 languages , you have to fill that each languages data and click on submit , repeting the step for 2 times</li>
+  <li>3. after you finish submiting , click on next</li>
+  <li>4. The test can only be taken in any one language and that experimental language will be choosen in the next step.</li>
+</ul>
+   
     <form className="form-container" onSubmit={handleSubmit}>
       <label htmlFor="languageSelect">Language:</label>
       <select id="languageSelect" value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
@@ -88,8 +96,7 @@ const OtherLayoutPage = () => {
       </Link>
     </form>
 
-
-
+  </div>
   );
 };
 
