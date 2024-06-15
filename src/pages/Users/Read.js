@@ -142,7 +142,7 @@ const Read = () => {
                   boxShadow: 5,
                 }}  >
 
-                      <Image style={{width: "100%",objectFit:'contain'}} src={codedata && url} alt="code"></Image>
+                      <Image style={{objectFit:'contain'}} src={codedata && url} alt="code"></Image>
 
                     </Box>
                   </Paper>
