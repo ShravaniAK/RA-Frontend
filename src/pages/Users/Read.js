@@ -143,7 +143,7 @@ const Read = () => {
                 }}  >
 
                       <Image style={{width: "100%",
-                  height: 500, objectFit:'contain'
+                  height: 500, objectFit:'contain',
                   overflow: "auto",}} src={codedata && url} alt="code"></Image>
 
                     </Box>
