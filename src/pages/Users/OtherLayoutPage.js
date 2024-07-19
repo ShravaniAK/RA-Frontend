@@ -76,7 +76,7 @@ const OtherLayoutPage = () => {
 
         <label htmlFor="durationSelect">Duration:</label>
         <select id="durationSelect" value={duration} onChange={(e) => setDuration(e.target.value)}>
-          <option value="">Select duration</option>
+          <option value="">Select duration </option>
           {durations.map((duration, index) => (
             <option key={index} value={index + 1}>
               {duration}
@@ -84,10 +84,10 @@ const OtherLayoutPage = () => {
           ))}
         </select>
 
-        <label htmlFor="timeInput">Time:</label>
+        <label htmlFor="timeInput">Time (in months):</label>
         <input type="text" id="timeInput" value={time} onChange={(e) => setTime(e.target.value)} />
 
-        <label htmlFor="dateInput">Date:</label>
+        <label htmlFor="dateInput">last used Date:</label>
         <input type="date" id="dateInput" value={date} onChange={(e) => setDate(e.target.value)} />
 
         <button type="submit">Submit</button>
