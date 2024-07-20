@@ -45,7 +45,7 @@ const OtherLayoutPage = () => {
   };
 
   return (
-    <div>
+    <div style={{minHeight:'140vh'}}>
       <ul style={{ margin: "1rem" }}>
         <li>1. Select all the languages that you know and click on submit button after filling up the form for each language.</li>
         <li>2. For example, if you know 3 languages, you have to fill in each language's data and click on submit, repeating the step for 2 more times.</li>
