@@ -45,7 +45,7 @@ const DownloadData = () => {
   const [userData, setUserData] = React.useState([]);
 
   const handleDownloadAll = () => {
-    fetch("https://assesment-web.onrender.com/download/", {
+    fetch("https://assesmentwebsite.onrender.com/download/", {
       method: 'GET',
     })
       .then(response => response.text())
@@ -54,7 +54,7 @@ const DownloadData = () => {
   };
   
   const handleDownload = () => {
-    fetch("https://assesment-web.onrender.com/usersdata")
+    fetch("https://assesmentwebsite.onrender.com/usersdata")
       .then(response => response.json())
       .then(result => download(JSON.stringify(result), "all_data.csv", "text/csv"))
       .catch(error => console.log('error', error));
@@ -63,7 +63,7 @@ const DownloadData = () => {
   return (
     <div>
        <a
-        href="https://assesment-web.onrender.com/getQuestionSheet"
+        href="https://assesmentwebsite.onrender.com/getQuestionSheet"
         download="all_data.csv"
       >
         <Button
@@ -75,7 +75,7 @@ const DownloadData = () => {
         </Button>
       </a>
       <a
-        href="https://assesment-web.onrender.com/usersdata"
+        href="https://assesmentwebsite.onrender.com/usersdata"
         download="all_data.csv"
       >
         <Button

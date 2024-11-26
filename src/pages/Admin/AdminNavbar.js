@@ -31,7 +31,7 @@ function AdminNavbar() {
   
     const saveFile = () => {
         saveAs(
-          "https://assesment-web.onrender.com/download",
+          "https://assesmentwebsite.onrender.com/download",
           "data.csv"
         );
       };
